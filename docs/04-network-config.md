@@ -14,8 +14,8 @@ You'll configure:
 
 ```bash
 ./scripts/03-configure-interfaces.sh
-./scripts/04-setup-udev-rules.sh
-./scripts/05-setup-systemd.sh
+./scripts/04-setup-udev-rules.sh  # Creates udev rules, bringup scripts, and systemd boot service
+./scripts/05-setup-systemd.sh     # Enables systemd-networkd and verifies the setup
 ```
 
 ## Manual Setup
@@ -101,6 +101,8 @@ EOF"
 ```
 
 ### Step 3: Create Udev Rules
+
+> **Note:** Steps 3-5 are handled automatically by `./scripts/04-setup-udev-rules.sh`.
 
 Udev rules trigger scripts when TB4 cables are connected:
 
@@ -235,7 +237,19 @@ for node in n2 n3 n4; do
 done
 ```
 
-### Step 6: Enable IPv4 Forwarding
+### Step 6: Enable systemd-networkd
+
+> **Note:** This step is handled automatically by `./scripts/05-setup-systemd.sh`.
+
+Required for systemd `.link` files to work (interface renaming to en05/en06):
+
+```bash
+for node in n2 n3 n4; do
+    ssh $node "systemctl enable systemd-networkd && systemctl start systemd-networkd"
+done
+```
+
+### Step 7: Enable IPv4 Forwarding
 
 Required for OpenFabric routing:
 
@@ -246,7 +260,7 @@ for node in n2 n3 n4; do
 done
 ```
 
-### Step 7: Apply Network Configuration
+### Step 8: Apply Network Configuration
 
 Reload network settings:
 
@@ -256,7 +270,7 @@ for node in n2 n3 n4; do
 done
 ```
 
-### Step 8: Verify Configuration
+### Step 9: Verify Configuration
 
 **Check interface status:**
 
