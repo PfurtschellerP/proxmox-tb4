@@ -129,8 +129,8 @@ scripts/
 ├── 01-setup-ssh.sh            # Deploy SSH keys
 ├── 02-install-tb4-modules.sh  # Load kernel modules
 ├── 03-configure-interfaces.sh # Set up TB4 networking
-├── 04-setup-udev-rules.sh     # Create automation rules
-├── 05-setup-systemd.sh        # Enable boot services
+├── 04-setup-udev-rules.sh     # Create automation rules & boot service
+├── 05-setup-systemd.sh        # Enable systemd-networkd & verify
 ├── 06-verify-mesh.sh          # Test connectivity
 ├── lib/
 │   ├── common.sh              # Shared functions
