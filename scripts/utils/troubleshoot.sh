@@ -43,7 +43,8 @@ for i in "${!nodes[@]}"; do
 
     echo ""
     echo "=== $name ==="
-    ssh "root@$node" "ip addr show ${TB4_IFACE1} ${TB4_IFACE2} 2>/dev/null || echo 'TB4 interfaces not found'"
+    ssh "root@$node" "ip addr show ${TB4_IFACE1} 2>/dev/null || echo 'TB4 interface ${TB4_IFACE1} not found'"
+    ssh "root@$node" "ip addr show ${TB4_IFACE2} 2>/dev/null || echo 'TB4 interface ${TB4_IFACE2} not found'"
 done
 
 log_step "3. TB4 Kernel Modules"
